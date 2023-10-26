@@ -1,7 +1,10 @@
 import React from 'react';
-import { Text, View, Button } from 'react-native';
-import { ITechnology, ITechnologyProps } from '../../interfaces';
+import { Text, View, Pressable, StyleSheet, Image } from 'react-native';
+import { ITechnologyProps } from '../../interfaces';
 
+const completeIcon = require('../../assets/complete.png');
+const incompleteIcon = require('../../assets/incomplete.png');
+const binIcon = require('../../assets/bin.png');
 
 const Technology = (props: ITechnologyProps) => {
     const technology = props.technology;
@@ -17,11 +20,21 @@ const Technology = (props: ITechnologyProps) => {
         props.onRemoveTechnology(id);
     }
 
-    return <View>
-        <Button  title={technology!.completed ? 'Completed' : "Not completed"} onPress={toggleCompleted} />
+    return <View style={styles.technology}>
+        <Pressable onPress={toggleCompleted}>{ technology?.completed ? <Image source={completeIcon} /> : <Image source={incompleteIcon} /> }</Pressable>
         <Text>{technology!.text}</Text>
-        <Button title='Delete' onPress={remove} />
+        <Pressable onPress={remove}><Image source={binIcon}/></Pressable>
     </View>
 }
+
+const styles = StyleSheet.create({
+    technology: {
+        flex: 0,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        fontSize: 14,
+    }
+})
 
 export default Technology;
