@@ -1,6 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import Technology from './Technology';
 import { ITechnology, ITechnologyProps } from '../../interfaces';
+
+const clipboardIcon = require('../../assets/clipboard.png')
 
 const TechnologyListWrapper = (props:ITechnologyProps) => {
     const completedTechnologies = [];
@@ -22,10 +24,11 @@ const TechnologyListWrapper = (props:ITechnologyProps) => {
                     {(props.technologies as ITechnology[]).map(e => <Technology onToggleTechnology={props.onToggleTechnology} onRemoveTechnology={props.onRemoveTechnology} technology={e} key={e.id} />)}
                 </View>
             :
-            <View>
+            <View style={styles.noTechView}>
+                <Image source={clipboardIcon} />
                 <View>
-                    <Text>Você ainda não tem tecnologias cadastradas</Text>
-                    <Text>Crie tarefas e organize seus itens a fazer</Text>
+                    <Text style={styles.noTechHeader}>Você ainda não tem tecnologias cadastradas</Text>
+                    <Text style={styles.noTechText}>Crie tarefas e organize seus itens a fazer</Text>
                 </View>
             </View>
             }
@@ -39,6 +42,7 @@ const styles = StyleSheet.create({
         marginTop: 32,
     },
     statsWrapper: {
+        marginBottom: 20,
         flex: 0,
         flexDirection: 'row',
         justifyContent: 'space-between'
@@ -62,7 +66,28 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         backgroundColor: '#333333',
         borderRadius: 999,
+    },
+    noTechView: {
+        flex: 0,
+        paddingHorizontal: 10,
+        paddingVertical: 48,
+        borderTopColor: '#333333',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 16,
+    },
+    noTechHeader: {
+        fontSize: 14,
+        color: '#808080',
+        fontWeight: '700',
+        textAlign: 'center',
+    },
+    noTechText: {
+        fontSize: 14,
+        color: '#808080',
+        textAlign: 'center',
     }
+
 })
 
 export default TechnologyListWrapper;

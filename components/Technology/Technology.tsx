@@ -22,7 +22,7 @@ const Technology = (props: ITechnologyProps) => {
 
     return <View style={styles.technology}>
         <Pressable onPress={toggleCompleted}>{ technology?.completed ? <Image source={completeIcon} /> : <Image source={incompleteIcon} /> }</Pressable>
-        <Text>{technology!.text}</Text>
+        <Text style={styles.technologyText}>{technology!.text}</Text>
         <Pressable onPress={remove}><Image source={binIcon}/></Pressable>
     </View>
 }
@@ -34,6 +34,18 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         fontSize: 14,
+        gap: 5,
+        backgroundColor: '#262626',
+        padding: 12,
+        borderRadius: 4,
+        borderColor: '#808080',
+        borderWidth: 0.3,
+        marginBottom: 8
+    },
+
+    technologyText: {
+        width: '84%',
+        color: '#F2F2F2'
     }
 })
 
